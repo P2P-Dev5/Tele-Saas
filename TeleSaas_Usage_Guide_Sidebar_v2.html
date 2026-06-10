@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>دليل استخدام نظام TeleSaas</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#121c2b;
+      --panel2:#172235;
+      --card:#1b2738;
+      --line:rgba(255,255,255,.10);
+      --text:#eef5ff;
+      --muted:#a8b7ca;
+      --soft:#d7e3f5;
+      --brand:#8b1dbb;
+      --brand2:#b035d4;
+      --gold:#e7b85b;
+      --green:#2dd4bf;
+      --red:#fb7185;
+      --blue:#60a5fa;
+      --shadow:0 25px 70px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(139,29,187,.25), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(45,212,191,.12), transparent 28%),
+        var(--bg);
+      color:var(--text);
+      min-height:100vh;
+    }
+    a{color:inherit;text-decoration:none}
+    .layout{
+      display:grid;
+      grid-template-columns:300px 1fr;
+      min-height:100vh;
+    }
+    aside{
+      position:sticky;
+      top:0;
+      height:100vh;
+      padding:24px 18px;
+      background:linear-gradient(180deg, rgba(18,28,43,.98), rgba(12,18,30,.98));
+      border-left:1px solid var(--line);
+      overflow:auto;
+      box-shadow:var(--shadow);
+      z-index:10;
+    }
+    .brand{
+      padding:18px 16px;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:linear-gradient(135deg, rgba(139,29,187,.22), rgba(96,165,250,.10));
+      margin-bottom:18px;
+    }
+    .brand .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .mark{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      box-shadow:0 12px 30px rgba(139,29,187,.35);
+      font-size:22px;
+    }
+    .brand h1{font-size:22px;margin:0;letter-spacing:.2px}
+    .brand p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:12px;
+      padding:7px 12px;
+      border:1px solid rgba(231,184,91,.35);
+      color:#ffe2a7;
+      border-radius:999px;
+      background:rgba(231,184,91,.08);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .nav-title{
+      color:#7f8fa8;
+      font-size:12px;
+      margin:20px 10px 10px;
+    }
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .nav button{
+      border:1px solid transparent;
+      width:100%;
+      text-align:right;
+      padding:13px 14px;
+      border-radius:15px;
+      background:transparent;
+      color:var(--muted);
+      cursor:pointer;
+      font-family:inherit;
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      transition:.18s ease;
+    }
+    .nav button:hover{background:rgba(255,255,255,.05);color:var(--text)}
+    .nav button.active{
+      color:white;
+      background:linear-gradient(135deg, rgba(139,29,187,.95), rgba(176,53,212,.88));
+      box-shadow:0 15px 35px rgba(139,29,187,.25);
+      border-color:rgba(255,255,255,.16);
+    }
+    .nav small{color:rgba(255,255,255,.55);font-size:11px}
+    main{
+      padding:36px;
+      overflow:hidden;
+    }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg, rgba(27,39,56,.92), rgba(18,28,43,.82));
+      border-radius:30px;
+      padding:38px;
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
+    .hero:before{
+      content:"";position:absolute;inset:auto auto -120px -120px;
+      width:290px;height:290px;border-radius:50%;
+      background:rgba(45,212,191,.12);filter:blur(4px);
+    }
+    .hero h2{font-size:42px;margin:0 0 12px;line-height:1.25}
+    .hero p{margin:0;color:var(--muted);font-size:18px;line-height:2;max-width:980px}
+    .tabs-area{position:relative}
+    .section{
+      display:none;
+      animation:fade .22s ease;
+    }
+    .section.active{display:block}
+    @keyframes fade{from{opacity:.2;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .grid{display:grid;gap:16px}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(27,39,56,.94), rgba(18,28,43,.94));
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:0 14px 35px rgba(0,0,0,.18);
+    }
+    .card h3{margin:0 0 10px;font-size:22px;color:#fff}
+    .card p{margin:0;color:var(--muted);line-height:1.9;font-size:15px}
+    .card ul,.card ol{margin:12px 0 0;padding:0 22px;color:var(--muted);line-height:2}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:6px 10px;
+      border-radius:999px;
+      color:#dce9ff;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.18);
+      font-size:12px;
+      margin-bottom:12px;
+    }
+    .resources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .resource{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:20px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg, rgba(139,29,187,.18), rgba(96,165,250,.08));
+      transition:.18s ease;
+    }
+    .resource:hover{transform:translateY(-2px);border-color:rgba(176,53,212,.45);box-shadow:0 18px 40px rgba(139,29,187,.15)}
+    .resource b{display:block;font-size:17px;margin-bottom:5px}
+    .resource span{color:var(--muted);font-size:13px}
+    .arrow{font-size:22px;color:var(--gold)}
+    .flow{display:grid;gap:12px;counter-reset:step}
+    .flow .step{
+      counter-increment:step;
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:14px;
+      align-items:start;
+      padding:18px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+    }
+    .flow .step:before{
+      content:counter(step);
+      width:36px;height:36px;border-radius:12px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
+      font-weight:800;
+    }
+    .step h4{margin:0 0 4px;font-size:17px}.step p{margin:0;color:var(--muted);line-height:1.8}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.025)}
+    table{width:100%;border-collapse:collapse;min-width:760px}
+    th,td{padding:15px 16px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top;line-height:1.7}
+    th{color:#fff;background:rgba(255,255,255,.06);font-size:14px}
+    td{color:var(--muted);font-size:14px}
+    tr:last-child td{border-bottom:0}
+    .notice{
+      border:1px solid rgba(231,184,91,.25);
+      background:rgba(231,184,91,.08);
+      color:#ffe2a7;
+      border-radius:18px;
+      padding:18px 20px;
+      line-height:1.9;
+      margin-top:16px;
+    }
+    .footer{
+      margin-top:24px;
+      padding:18px;
+      color:#7989a2;
+      font-size:13px;
+      text-align:center;
+    }
+    .mobile-nav{display:none}
+    @media(max-width:960px){
+      .layout{grid-template-columns:1fr}
+      aside{position:relative;height:auto;border-left:0;border-bottom:1px solid var(--line)}
+      .nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+      main{padding:20px}
+      .hero{padding:26px}.hero h2{font-size:30px}.hero p{font-size:15px}
+      .grid.two,.grid.three,.resources{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">
+        <div class="logo"><div class="mark">🤖</div><h1>TeleSaas</h1></div>
+        <p>دليل الاستخدام الداخلي للتجربة التشغيلية وربط المتابعة بين البوت والشيت والإضافة.</p>
+        <div class="status">Internal Operational Trial</div>
+      </div>
+      <div class="nav-title">القائمة الرئيسية</div>
+      <nav class="nav" aria-label="قائمة التنقل">
+        <button class="active" data-tab="overview"><span>الفكرة العامة</span><small>Overview</small></button>
+        <button data-tab="links"><span>الروابط</span><small>Resources</small></button>
+        <button data-tab="operation"><span>طريقة التشغيل</span><small>Workflow</small></button>
+        <button data-tab="sheets"><span>الشيتات</span><small>Sheets</small></button>
+        <button data-tab="extension"><span>الإضافة</span><small>Extension</small></button>
+        <button data-tab="bot"><span>البوت والجروبات</span><small>Telegram</small></button>
+        <button data-tab="benefits"><span>الفائدة</span><small>Value</small></button>
+        <button data-tab="notes"><span>ملاحظات التشغيل</span><small>Notes</small></button>
+      </nav>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <h2>دليل استخدام نظام TeleSaas</h2>
+        <p>نظام داخلي لمتابعة سرعة الرد والتنسيق بين الأقسام من خلال Telegram Bot وGoogle Sheet وChrome Extension، مع واجهة متابعة يومية للإدارة حسب الصلاحيات.</p>
+      </section>
+
+      <div class="tabs-area">
+        <section id="overview" class="section active">
+          <div class="grid two">
+            <div class="card">
+              <span class="tag">🎯 الهدف</span>
+              <h3>الفكرة العامة</h3>
+              <p>TeleSaas ينظم متابعة الجروبات بين الأقسام، يوثق الرسائل والحالات، يقيس سرعة الرد، ويعرض المؤشرات للإدارة من خلال إضافة المتصفح بدل الاعتماد على المتابعة اليدوية داخل الجروبات.</p>
+            </div>
+            <div class="card">
+              <span class="tag">🧩 المكونات</span>
+              <h3>ثلاثة أجزاء رئيسية</h3>
+              <ul>
+                <li><b>TeleSaas Extension:</b> واجهة المتابعة اليومية حسب الصلاحيات.</li>
+                <li><b>Google Sheet:</b> مصدر البيانات والسجلات والتشغيل.</li>
+                <li><b>Telegram Bot:</b> يلتقط الرسائل والحالات من الجروبات المطلوبة.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="notice">النظام حالياً جاهز للتجربة التشغيلية الداخلية قبل الاعتماد النهائي.</div>
+        </section>
+
+        <section id="links" class="section">
+          <div class="card">
+            <span class="tag">🔗 روابط التسليم</span>
+            <h3>المرفقات الأساسية</h3>
+            <p>يمكن الاطلاع على كافة التفاصيل والمرفقات أدناه بعد الضغط عليها وأخذ الصلاحية من المسؤول المختص أولاً.</p>
+          </div>
+          <div class="resources" style="margin-top:16px">
+            <a class="resource" href="https://docs.google.com/spreadsheets/d/1ML18wnjG8ks1ozRSkKGHGVjqR9QAxytZhIv_w8txQbU/edit?usp=drive_link" target="_blank"><div><b>Google Sheet</b><span>ملف النظام ومصدر البيانات</span></div><div class="arrow">↗</div></a>
+            <a class="resource" href="https://drive.google.com/file/d/1UuUJT7ZcMlaxvXp3nrgHVd4dB5gqnOvE/view?usp=drive_link" target="_blank"><div><b>TeleSaas Video</b><span>فيديو توضيحي لطريقة الاستخدام</span></div><div class="arrow">↗</div></a>
+            <a class="resource" href="https://drive.google.com/drive/folders/12of1B-vk9qRfqkrzCwlc9M4cxdYQCn3P?usp=drive_link" target="_blank"><div><b>TeleSaas Extension</b><span>ملف الإضافة للتركيب على المتصفح</span></div><div class="arrow">↗</div></a>
+            <a class="resource" href="https://drive.google.com/drive/folders/10mmofun1PkMzgY5V6aXCzYrFX9VDxnrL?usp=drive_link" target="_blank"><div><b>Project Package</b><span>ملف المشروع بالكامل</span></div><div class="arrow">↗</div></a>
+          </div>
+        </section>
+
+        <section id="operation" class="section">
+          <div class="card">
+            <span class="tag">⚙️ التشغيل</span>
+            <h3>طريقة تجهيز النظام</h3>
+            <p>يتم تجهيز النظام مرة واحدة من خلال الشيت، وبعدها تكون المتابعة اليومية من خلال الإضافة.</p>
+          </div>
+          <div class="flow" style="margin-top:16px">
+            <div class="step"><div><h4>تركيب الإضافة</h4><p>يتم تركيب TeleSaas Extension على المتصفح، ثم إدخال رمز الدخول فقط لتحديد الصلاحيات تلقائياً.</p></div></div>
+            <div class="step"><div><h4>إضافة الأقسام</h4><p>تسجيل الأقسام الرسمية والهاشتاج الرسمي ووقت السماح SLA.</p></div></div>
+            <div class="step"><div><h4>إضافة الموظفين</h4><p>تسجيل بيانات الموظفين وربط كل موظف بالقسم والدور الوظيفي وTelegram ID.</p></div></div>
+            <div class="step"><div><h4>إضافة الجروبات</h4><p>تسجيل الجروبات المطلوب متابعتها وإدخال Telegram Chat ID لكل جروب.</p></div></div>
+            <div class="step"><div><h4>ربط الجروبات بالأقسام</h4><p>تحديد الأقسام الموجودة داخل كل جروب ليتم ربط الرسائل بالمسار الصحيح.</p></div></div>
+            <div class="step"><div><h4>إضافة الموظفين إلى الجروبات</h4><p>ربط الموظفين بالجروبات وتحديد القسم الذي يمثلونه داخل كل جروب.</p></div></div>
+            <div class="step"><div><h4>إضافة البوت للجروبات</h4><p>بعد تجهيز البيانات، يتم إضافة البوت للجروبات المطلوبة وتشغيل المتابعة.</p></div></div>
+          </div>
+        </section>
+
+        <section id="sheets" class="section">
+          <div class="card">
+            <span class="tag">📄 الشيتات</span>
+            <h3>الشيت هو مصدر البيانات</h3>
+            <p>Google Sheet يحتوي على بيانات الإعداد، السجلات، الحالات، المسارات، الاستثناءات، ومؤشرات الأداء.</p>
+          </div>
+          <div class="table-wrap" style="margin-top:16px">
+            <table>
+              <thead><tr><th>الشيت</th><th>الوظيفة</th><th>الاستخدام</th></tr></thead>
+              <tbody>
+                <tr><td>لوحة الإدارة</td><td>ملخص عام لحالة النظام والمؤشرات الأساسية.</td><td>عرض ومراجعة</td></tr>
+                <tr><td>تعليمات التشغيل</td><td>تعليمات الاستخدام وطريقة تجهيز النظام.</td><td>مرجع داخلي</td></tr>
+                <tr><td>الإعدادات</td><td>إعدادات النظام العامة والهاشتاجات وقواعد التشغيل.</td><td>إداري</td></tr>
+                <tr><td>الأقسام</td><td>تسجيل الأقسام الرسمية وSLA والهاشتاج الرسمي.</td><td>تجهيز أساسي</td></tr>
+                <tr><td>مرادفات الأقسام</td><td>ربط أكثر من اسم أو هاشتاج بنفس القسم.</td><td>تحسين التعرف</td></tr>
+                <tr><td>الموظفين</td><td>بيانات الموظفين والأقسام والصلاحيات وTelegram ID.</td><td>تجهيز أساسي</td></tr>
+                <tr><td>الجروبات</td><td>بيانات الجروبات وTelegram Chat ID.</td><td>تجهيز أساسي</td></tr>
+                <tr><td>ربط الجروبات بالأقسام</td><td>تحديد الأقسام الموجودة داخل كل جروب.</td><td>ربط تشغيلي</td></tr>
+                <tr><td>عضوية الجروبات</td><td>تحديد الموظفين داخل كل جروب والقسم الذي يمثلونه.</td><td>ربط تشغيلي</td></tr>
+                <tr><td>سجل الرسائل</td><td>حفظ الرسائل التي يلتقطها البوت من الجروبات.</td><td>تشغيلي</td></tr>
+                <tr><td>سجل الحالات</td><td>الحالات التي تم فتحها ومتابعتها.</td><td>تشغيلي</td></tr>
+                <tr><td>مسارات الحالات</td><td>مسار كل حالة حسب القسم المطلوب منه الرد.</td><td>تشغيلي</td></tr>
+                <tr><td>سجل الاستثناءات</td><td>الرسائل أو الحالات التي تحتاج مراجعة يدوية.</td><td>مراجعة</td></tr>
+                <tr><td>مؤشرات الأداء</td><td>ملخص الأداء حسب الفترة والكيان وSLA.</td><td>متابعة</td></tr>
+                <tr><td>سجل التدقيق والتصحيحات والتعديلات والقوائم</td><td>شيتات داخلية للتنظيم والمراجعة والتدقيق.</td><td>داخلي</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="extension" class="section">
+          <div class="grid two">
+            <div class="card">
+              <span class="tag">🧩 Extension</span>
+              <h3>واجهة المتابعة اليومية</h3>
+              <p>الإضافة هي الواجهة الأساسية للإدارة والموظفين. المستخدم يدخل برمز دخول فقط، والنظام يحدد الصلاحيات تلقائياً.</p>
+            </div>
+            <div class="card">
+              <span class="tag">🔐 صلاحيات</span>
+              <h3>حسب الرمز</h3>
+              <ul>
+                <li>المدير أو الأدمن: لوحة متابعة عامة وفلاتر.</li>
+                <li>الموظف: البيانات المرتبطة به فقط.</li>
+                <li>المستخدم النهائي لا يحتاج روابط تقنية أو أكواد.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="notice">المتابعة اليومية للإدارة تكون من خلال TeleSaas Extension، وليس من شيت الرسوم البيانية.</div>
+        </section>
+
+        <section id="bot" class="section">
+          <div class="card">
+            <span class="tag">🤖 Telegram Bot</span>
+            <h3>البوت والجروبات</h3>
+            <p>يتم إضافة البوت فقط إلى الجروبات المطلوب متابعتها. بعد ذلك يلتقط الرسائل التي تحتوي على هاشتاجات التشغيل ويسجلها داخل الشيت.</p>
+          </div>
+          <div class="grid three" style="margin-top:16px">
+            <div class="card"><h3>فتح حالة</h3><p>رسالة تحتوي على هاشتاج فتح حالة مثل سؤال أو طلب مع تحديد القسم المطلوب.</p></div>
+            <div class="card"><h3>الرد والمتابعة</h3><p>يتم احتساب الردود والمتابعات المرتبطة بالحالة أو المسار.</p></div>
+            <div class="card"><h3>الإغلاق</h3><p>عند إغلاق الحالة يتم احتساب مدة الحل وهل كانت داخل SLA أم لا.</p></div>
+          </div>
+        </section>
+
+        <section id="benefits" class="section">
+          <div class="grid two">
+            <div class="card">
+              <span class="tag">🚀 الفائدة</span>
+              <h3>قيمة النظام</h3>
+              <ul>
+                <li>تنظيم متابعة الجروبات بين الأقسام.</li>
+                <li>توثيق الرسائل والحالات بشكل واضح.</li>
+                <li>قياس سرعة الرد حسب القسم أو الجروب أو الموظف.</li>
+                <li>معرفة الحالات المتأخرة أو بدون رد.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <span class="tag">📈 متابعة أسرع</span>
+              <h3>Dashboard للإدارة</h3>
+              <ul>
+                <li>تقليل المتابعة اليدوية داخل الجروبات.</li>
+                <li>توفير واجهة متابعة من خلال الإضافة.</li>
+                <li>تقليل احتمالية ضياع الحالات أو نسيان المتابعة.</li>
+                <li>تجهيز بيانات قابلة للمراجعة والتحليل بشكل أسرع.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="notes" class="section">
+          <div class="card">
+            <span class="tag">📝 ملاحظات</span>
+            <h3>ملاحظات تشغيل مهمة</h3>
+            <ul>
+              <li>يجب إضافة البوت فقط إلى الجروبات المطلوب متابعتها.</li>
+              <li>يجب تسجيل Chat ID لكل جروب داخل شيت الجروبات.</li>
+              <li>يجب تسجيل Telegram ID لكل موظف داخل شيت الموظفين.</li>
+              <li>يجب ربط الجروبات بالأقسام وربط الموظفين بالجروبات قبل بدء التشغيل الكامل.</li>
+              <li>كل مستخدم يدخل من خلال رمز دخول مخصص حسب صلاحياته.</li>
+              <li>المستخدم النهائي لا يحتاج للوصول إلى الأكواد أو روابط الربط التقنية.</li>
+              <li>النظام حالياً جاهز للتجربة التشغيلية الداخلية قبل الاعتماد النهائي.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <div class="footer">TeleSaas</div>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.nav button');
+    const sections = document.querySelectorAll('.section');
+    function openTab(id){
+      buttons.forEach(b=>b.classList.toggle('active', b.dataset.tab===id));
+      sections.forEach(s=>s.classList.toggle('active', s.id===id));
+      window.scrollTo({top:0, behavior:'smooth'});
+      history.replaceState(null,'','#'+id);
+    }
+    buttons.forEach(btn=>btn.addEventListener('click',()=>openTab(btn.dataset.tab)));
+    const initial = location.hash.replace('#','');
+    if(initial && document.getElementById(initial)) openTab(initial);
+  </script>
+</body>
+</html>
